@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalCard - Smart Business Card Solution</title>
+    <meta name="description" content="Create your smart digital business card with NFC and QR support. Share contact info, links, portfolio, and more in seconds. No app required." />
+    <meta name="keywords" content="digital card, smart business card, NFC card, QR card, virtual card, online visiting card, professional card, digital identity, Smart, Simple, Shareable" />
+    <meta name="author" content="It Futurz" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+
+     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- what_icon && Scroll to Top Button -->
+    <div class="what_icon"><a href="https://api.whatsapp.com/send?phone=9879208321" target="_blank"><span><img src="./image/WhatsApp.svg" width="45px"></span></a></div>
+    <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+      
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+            <i class="fas fa-id-card-alt me-2"></i>DigitalCard
+            </a>
+
+            <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+            <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title"><i class="fas fa-id-card-alt me-2"></i>DigitalCard</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#how-it-works">How it Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#who-uses">Who Uses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#products">Products</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-none d-lg-block">
+                <ul class="navbar-nav flex-row gap-3">
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#how-it-works">How it Works</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#who-uses">Who Uses</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#products">Products</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-6 col-xl-5">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Your Business Card, Reimagined</h1>
+                        <p class="hero-subtitle">Create, share, and manage your digital business cards with QR codes. Connect instantly, share seamlessly, and never run out of cards again.</p>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-5 mb-lg-0">
+                            <a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="">
+                                <img src="./image/googleplay.png" alt="Googleplay Download" width="200px">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="">
+                                <img src="./image/appstore.png" alt="Appstore Download" width="200px">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-7">
+                    <div class="hero_right mt-5 mt-lg-0">
+                        <img src="./image/hero1.png" alt="Hero image" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="section_title_border mx-auto"></div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features1.png" alt="Qr code icon" width="100%">
+                        </div>
+                        <h4>QR Code Sharing</h4>
+                        <p class="mb-0">Generate instant QR codes for your business card. Let others scan and save your contact information directly to their phone.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features2.png" alt="contact icon" width="100%">
+                        </div>
+                        <h4>Contact Management</h4>
+                        <p class="mb-0">Organize and manage all your business contacts in one place. Track connections and maintain your professional network.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features3.png" alt="Instant Sharing icon" width="100%">
+                        </div>
+                        <h4>Instant Sharing</h4>
+                        <p class="mb-0">Share your digital card via WhatsApp, email, or social media. No more carrying physical cards or running out.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features4.png" alt="Easy Editing icon" width="100%">
+                        </div>
+                        <h4>Easy Editing</h4>
+                        <p class="mb-0">Update your information anytime. Changes are reflected instantly across all shared cards.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features5.png" alt="Share History icon" width="100%">
+                        </div>
+                        <h4>Share History</h4>
+                        <p class="mb-0">Keep track of when and with whom you've shared your card. Monitor your networking activities.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="./image/features6.png" alt="Mobile Optimized icon" width="100%">
+                        </div>
+                        <h4>Mobile Optimized</h4>
+                        <p class="mb-0">Designed for mobile-first experience. Access your digital cards anywhere, anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="section_title_border mx-auto"></div>
+            <div class="row">
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="">
+                        <div class="feature-icon mx-auto">
+                            <img src="./image/add-user.png" alt="Create Your Card icon" width="100%">
+                        </div>
+                    </div>
+                    <h4>1. Create Your Card</h4>
+                    <p>Sign up and create your digital business card with all your contact information, social links, and professional details.</p>
+                </div>
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="">
+                        <div class="feature-icon mx-auto">
+                            <img src="./image/qr-code.png" alt="Generate QR Code icon" width="100%">
+                        </div>
+                    </div>
+                    <h4>2. Generate QR Code</h4>
+                    <p>Get your unique QR code that contains all your contact information. Display it on your phone or print it out.</p>
+                </div>
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="">
+                        <div class="feature-icon mx-auto">
+                            <img src="./image/handshake.png" alt="Share & Connect icon" width="100%">
+                        </div>
+                    </div>
+                    <h4>3. Share & Connect</h4>
+                    <p>Let others scan your QR code to instantly save your contact. Share via WhatsApp, email, or any messaging platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Cards Created</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">100K+</span>
+                        <span class="stat-label">Contacts Shared</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Satisfaction Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Use digital card -->
+    <section id="who-uses" class="main_uses" >
+        <div class="container">
+            <h2 class="text-center">Who Uses Digital Card?</h2>
+            <div class="section_title_border mx-auto"></div>
+            <div class="row mt-5">
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Business Networking.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Business Networking</h4>
+                            <p>Connect instantly at networking events with shareable digital cards—making introductions more efficient than ever.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Sales.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Sales</h4>
+                            <p>Present your offerings seamlessly, generate quality leads, and stay top-of-mind with automated reminders.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Doctors.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Doctors</h4>
+                            <p>Offer quick access to your services and make appointment scheduling effortless for your patients.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Recruiters.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Recruiters</h4>
+                            <p>Streamline the hiring process by gathering candidate data and staying organized—all from your digital card.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Realtors.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Realtors</h4>
+                            <p>Showcase listings, book meetings, and follow up with potential clients directly through your smart card.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Freelancers.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Freelancers</h4>
+                            <p>Promote your skills and make it simple for clients to contact and hire you with just one tap.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Lawyers.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Lawyers</h4>
+                            <p>Make it easy to share legal expertise and stay connected with clients and peers using a smart business card.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Car Dealers.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Car Dealers</h4>
+                            <p>Display vehicle inventory and offers digitally, helping customers explore options quickly and conveniently.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-12  mb-4">
+                    <div class="uses">
+                        <div>
+                            <img src="./image/Managers.svg" alt="" width="100%" height="250px">
+                        </div>
+                        <div>
+                            <h4>Managers</h4>
+                            <p>Share your contact info and real-time updates with your team to ensure smooth and connected communication.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Products Section -->
+    <section id="products" class="py-4">
+        <div class="container">
+            <div class="section-bg">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3">Our Premium Products</h2>
+                    <p class="lead">Choose the perfect solution for your digital identity needs</p>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <!-- NFC Card -->
+                    <div class="col-lg-5 col-md-8 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="product-image">
+                                <!-- <i class="fas fa-credit-card product-icon"></i> -->
+                                 <img src="./image/hero1.png" alt="" width="100%">
+                                <div class="price-badge free-badge">FREE*</div>
+                            </div>
+                            <div class="card-body p-4 pt-0">
+                                <h4 class="card-title text-center fw-bold mb-3">NFC Smart Card</h4>
+                                <p class="card-text text-center text-muted mb-4">Premium NFC-enabled smart card for instant contact sharing and networking. Tap to connect instantly!</p>
+                                
+                                <ul class="feature-list mb-4">
+                                    <li>Instant Contact Sharing</li>
+                                    <li>Premium PVC Material</li>
+                                    <li>Custom Design Options</li>
+                                    <li>Water Resistant</li>
+                                    <li>2-Year Warranty</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-purchase" onclick="startPurchase('nfc-card', 'NFC Smart Card', 0, true)">
+                                        Get FREE with App Purchase
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Digital Card App -->
+                    <div class="col-lg-5 col-md-8 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="product-image">
+                                <!-- <i class="fas fa-mobile-alt product-icon"></i> -->
+                                 <img src="./image/hero1.png" alt="" width="100%">
+                                <div class="price-badge">₹999</div>
+                            </div>
+                            <div class="card-body p-4 pt-0">
+                                <h4 class="card-title text-center fw-bold mb-3">Digital Card App</h4>
+                                <p class="card-text text-center text-muted mb-4">Complete digital business card solution with analytics, custom themes, and unlimited sharing capabilities.</p>
+                                
+                                <ul class="feature-list mb-4">
+                                    <li>Unlimited Digital Cards</li>
+                                    <li>Real-time Analytics</li>
+                                    <li>Custom Themes & Branding</li>
+                                    <li>Social Media Integration</li>
+                                    <li>FREE NFC Card Included</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-purchase" onclick="startPurchase('digital-app', 'Digital Card App', 999, false)">
+                                        <i class="fas fa-shopping-cart me-2"></i>Purchase Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class=""><small>* NFC Card is FREE when you purchase the Digital Card App</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Create Account Modal -->
+    <div class="modal fade" id="createAccountModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Your Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="createAccountForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="createEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="createPassword" minlength="8" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-purchase">
+                                <span class="create-btn-text">Create Account</span>
+                                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Flow Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Complete Your Purchase</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                        <div class="step active" id="step1">1</div>
+                        <div class="step" id="step2">2</div>
+                        <div class="step" id="step3">3</div>
+                        <div class="step" id="step4">4</div>
+                        <div class="step" id="step5">5</div>
+                    </div>
+
+                    <!-- Personal Details Form -->
+                    <div id="personalDetailsForm" class="purchase-step">
+                        <h4 class="mb-4">Personal Details</h4>
+                        <form id="personalForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-purchase">Continue to Shipping</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Shipping Details Form -->
+                    <div id="shippingDetailsForm" class="purchase-step d-none">
+                        <h4 class="mb-4">Shipping Details</h4>
+                        <form id="shippingForm">
+                            <div class="mb-3">
+                                <label class="form-label">Full Address</label>
+                                <textarea class="form-control" id="address" rows="3" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">PIN Code</label>
+                                    <input type="text" class="form-control" id="pincode" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" value="India" required>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-secondary" onclick="previousStep(1)">Back</button>
+                                <button type="submit" class="btn btn-purchase flex-fill">Continue to Payment</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Processing -->
+                    <div id="paymentProcessing" class="purchase-step d-none text-center">
+                        <h4 class="mb-4">Processing Payment</h4>
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted">Please wait while we process your payment...</p>
+                    </div>
+
+                    <!-- API Credential Generation -->
+                    <div id="credentialGeneration" class="purchase-step d-none text-center">
+                        <h4 class="mb-4">Generating Your Credentials</h4>
+                        <div class="spinner-border text-success mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted">Setting up your account and generating API credentials...</p>
+                    </div>
+
+                    <!-- Invoice Display -->
+                    <div id="invoiceDisplay" class="purchase-step d-none">
+                        <div class="invoice-card">
+                            <div class="invoice-header">
+                                <h3 class="mb-0">Payment Successful!</h3>
+                                <p class="mb-0 mt-2">Thank you for your purchase</p>
+                            </div>
+                            <div class="p-4">
+                                <div class="row mb-4">
+                                    <div class="col-6">
+                                        <h6 class="text-muted">Invoice Number</h6>
+                                        <strong id="invoiceNumber">INV-2024-001</strong>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <h6 class="text-muted">Date</h6>
+                                        <strong id="invoiceDate"></strong>
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">Customer Details</h6>
+                                    <div id="customerDetails"></div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">Order Summary</h6>
+                                    <div id="orderSummary"></div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">API Credentials</h6>
+                                    <div class="bg-light p-3 rounded">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <small class="text-muted">API Key</small><br>
+                                                <code id="apiKey">Loading...</code>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small class="text-muted">API Secret</small><br>
+                                                <code id="apiSecret">Loading...</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary" onclick="downloadInvoice()">
+                                        <i class="fas fa-download me-2"></i>Download Invoice
+                                    </button>
+                                    <button class="btn btn-success flex-fill" data-bs-dismiss="modal">
+                                        Complete Purchase
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CTA Section -->
+    <section id="download" class="cta-section section-padding">
+        <div class="container text-center">
+            <h2 class="mb-4">Ready to Go Digital?</h2>
+            <p class="lead mb-4">Join thousands of professionals who've already made the switch to digital business cards.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="">
+                            <img src="./image/googleplay.png" alt="Googleplay Download" width="200px">
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="">
+                            <img src="./image/appstore.png" alt="Appstore Download" width="200px">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="my-5">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle text-center">Everything you need to know about our digital card solutions</p>
+            </div>
+            
+            <div class="row faq-container">
+                <!-- FAQ Item 1 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="nfc card work tap share contact">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <span>How does the NFC Smart Card work?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Simply tap your NFC card on any NFC-enabled smartphone, and your digital business card will instantly appear on their device. The card contains a <span class="highlight-text">programmable NFC chip</span> that redirects to your personalized digital profile with all your contact information, social media links, and business details.
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="col-xl-6">
+                <div class="faq-item" data-keywords="compatible phones devices android iphone ios">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <span>Is it compatible with all smartphones?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Our NFC cards work with <span class="highlight-text">99% of modern smartphones</span> including iPhone (iOS 11+) and Android devices (Android 4.4+). For devices without NFC, we also provide QR code alternatives that work universally across all smartphones and tablets.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                <!-- FAQ Item 3 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="customize design card logo branding colors">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <span>Can I customize my digital card design?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! Our Digital Card App offers <span class="highlight-text">unlimited customization options</span> including custom themes, colors, fonts, logos, background images, and layout styles. You can create multiple card designs for different purposes and switch between them instantly.
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="analytics tracking views clicks data insights">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>Do I get analytics on my card performance?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Our app provides <span class="highlight-text">real-time analytics</span> including total views, click-through rates, most popular links, geographic data of viewers, and engagement trends. You can track which networking events or meetings generate the most interest in your profile.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                <!-- FAQ Item 5 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="update information edit card real-time changes">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <span>Can I update my card information after it's created?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Of course! You can update your information <span class="highlight-text">anytime, anywhere</span> through our mobile app or web dashboard. All changes are reflected instantly across all your shared cards, and the physical NFC card will always redirect to your latest information.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                <!-- FAQ Item 6 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="price cost free nfc card app purchase">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <span>What's included in the ₹999 package?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our ₹999 package includes the <span class="highlight-text">complete Digital Card App</span> with unlimited card creation, all premium themes, real-time analytics, social media integration, lead management, and a FREE premium NFC card with custom design. It's a one-time purchase with lifetime access.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                <!-- FAQ Item 7 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="delivery shipping nfc card time location">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <span>How long does NFC card delivery take?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We deliver across India within <span class="highlight-text">3-5 business days</span> through reliable courier services. You'll receive a tracking number once your card is dispatched. For major cities, express delivery options are available for faster delivery within 1-2 days.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+
+                <!-- FAQ Item 8 -->
+                 <div class="col-xl-6">
+                <div class="faq-item" data-keywords="support help contact customer service">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <div class="d-flex align-items-center">
+                            <div class="faq-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <span>What kind of customer support do you provide?</span>
+                        </div>
+                        <div class="faq-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer <span class="highlight-text">24/7 customer support</span> through multiple channels including live chat, email, and phone support. Our technical team provides setup assistance, troubleshooting, design guidance, and ongoing support to ensure you get the most out of your digital card solution.
+                        </div>
+                    </div>
+                </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-4 mb-5">
+        <div class="container">
+            <h1 class="section-title">Get in Touch</h1>
+            <p class="section-subtitle text-center">Ready to revolutionize your networking? We're here to help you get started with our digital card solutions.</p>
+            <div class="row">
+                    <div class="col-12">
+                        <div class="contact-card">
+                            <div class="row">
+                                <div class="col-lg-7 align-items-center d-flex">
+                                    <div class="contact-form-section">
+                                        <h2 class="">Send us a Message</h2>
+                                        <form id="contactForm">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6 mb-3 mb-md-0">
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" id="cfirstName" name="firstName" placeholder="First Name" required>
+                                                        <label for="firstName">First Name *</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" id="clastName" name="lastName" placeholder="Last Name" required>
+                                                        <label for="lastName">Last Name *</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-md-6 mb-3 mb-md-0">
+                                                    <div class="form-floating">
+                                                        <input type="email" class="form-control" id="cemail" name="email" placeholder="Email Address" required>
+                                                        <label for="email">Email Address *</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                        type="tel"
+                                                        class="form-control"
+                                                        id="cphone"
+                                                        placeholder="Phone Number"
+                                                        pattern="^\d{10}$"
+                                                        maxlength="10"
+                                                        minlength="10"
+                                                        name="phone"
+                                                        required
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+                                                        >
+                                                        <label for="phone">Phone Number *</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-1">
+                                                <textarea class="form-control" id="cmessage" name="message" placeholder="Your Message" style="height: 120px" required></textarea>
+                                                <label for="message">Your Message *</label>
+                                            </div>
+                                            <div id="formMessage" class=""></div>
+
+                                            <button type="submit" class="btn btn-submit">
+                                                <i class="fas fa-paper-plane me-2"></i>
+                                                Send Message
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-5 mt-lg-0 mt-5">
+                                    <div class="contact-info-section">
+                                        <h2 class="">Contact Information</h2>
+                                        
+                                        <div class="contact-info-item">
+                                            <div class="contact-icon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </div>
+                                            <div class="contact-details">
+                                                <h4>Visit Our Office</h4>
+                                                <p>310-311 Raghuvir Symphony Shoppers, Althan Canal Road, Opp. Green Victory Surat-395007, Gujarat India</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="contact-info-item">
+                                            <div class="contact-icon">
+                                                <i class="fas fa-phone"></i>
+                                            </div>
+                                            <div class="contact-details">
+                                                <h4>Call Us</h4>
+                                                <p>+91 98792 08321</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="contact-info-item">
+                                            <div class="contact-icon">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <div class="contact-details">
+                                                <h4>Email Us</h4>
+                                                <p>info@itfuturz.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h5><i class="fas fa-id-card-alt me-2"></i>DigitalCard</h5>
+                    <p>Revolutionizing the way professionals share and manage business cards through digital technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold">Product</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-light text-decoration-none">Features</a></li>
+                        <li><a href="#products" class="text-light text-decoration-none">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Privacy</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold">Download</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="text-light text-decoration-none">iOS App</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.itfuturz.digitalcard&hl=en" class="text-light text-decoration-none">Android App</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 DigitalCard. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Counter animation -->
+    <script>
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+                const suffix = counter.textContent.replace(/[\d]/g, '');
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current) + suffix;
+                }, 20);
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+
+<!-- FAQ Close and open -->
+    <script>
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        function openSupport() {
+            alert('Opening support chat...');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.faq-item')) {
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        });
+    </script>
+    
+<!-- off Canvas navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const offcanvasElement = document.getElementById('offcanvasNavbar');
+            const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+
+            document.querySelectorAll('#offcanvasNavbar .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                offcanvas.hide();
+            });
+            });
+        });
+    </script>
+
+<!-- Scroll To top button -->
+    <script>
+        const scrollBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", () => {
+            scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+        });
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+
+<!-- Contact post Api -->
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const data = {
+        firstName: document.getElementById("cfirstName").value,
+        lastName: document.getElementById("clastName").value,
+        email: document.getElementById("cemail").value,
+        phone: document.getElementById("cphone").value,
+        message: document.getElementById("cmessage").value,
+        };
+        const messageDiv = document.getElementById("formMessage");
+        messageDiv.innerHTML = ""; // Clear previous messages
+        
+
+        try {
+        const res = await fetch("http://localhost:3100/web/landing/api/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        if (result.success) {
+            messageDiv.innerHTML = `<div class="alert alert-success">${result.message}</div>`;
+            document.getElementById("contactForm").reset();
+        } else {
+            messageDiv.innerHTML = `<div class="alert alert-danger">Error: ${result.message}</div>`;
+        }
+        } catch (err) {
+        console.error(err);
+        messageDiv.innerHTML = `<div class="alert alert-danger">Something went wrong. Please try again later.</div>`;
+        }
+    });
+    </script>
+
+<!-- purchase products -->
+    <script>
+        let currentProduct = {};
+        let currentStep = 1;
+        let orderData = {};
+
+        function startPurchase(pid, name, price, isFree) {
+            currentProduct = { id: pid, name, price, isFree };
+            if (isFree) {
+                alert('Please purchase the Digital Card App to get the NFC Card for free!');
+                currentProduct = { id: 'digital-app', name: 'Digital Card App', price: 999, isFree: false };
+            }
+            document.getElementById('createEmail').value = '';
+            document.getElementById('createPassword').value = '';
+            new bootstrap.Modal(document.getElementById('createAccountModal')).show();
+        }
+
+        document.getElementById('createAccountForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('createEmail').value;
+            const password = document.getElementById('createPassword').value;
+            const createBtn = document.querySelector('#createAccountForm button');
+            const btnText = createBtn.querySelector('.create-btn-text');
+            const spinner = createBtn.querySelector('.spinner-border');
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            try {
+                const resp = await fetch('http://localhost:3100/web/landing/api/create-account', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await resp.json();
+                if (!data.success) {
+                    alert(data.message || 'Account creation failed. Please try again.');
+                    return;
+                }
+                orderData.personal = { email, password };
+                bootstrap.Modal.getInstance(document.getElementById('createAccountModal')).hide();
+                setTimeout(() => {
+                    new bootstrap.Modal(document.getElementById('purchaseModal')).show();
+                    resetPurchaseFlow();
+                }, 300);
+            } catch (err) {
+                alert('Error during account creation. Please try again.');
+                console.error(err);
+            } finally {
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+            }
+        });
+
+        function resetPurchaseFlow() {
+            currentStep = 1;
+            updateStepIndicator();
+            showStep(1);
+            document.getElementById('personalForm').reset();
+            document.getElementById('shippingForm').reset();
+            document.getElementById('email').value = orderData.personal.email;
+        }
+
+        function updateStepIndicator() {
+            for (let i = 1; i <= 5; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                if (i < currentStep) step.classList.add('completed');
+                else if (i === currentStep) step.classList.add('active');
+            }
+        }
+
+        function showStep(stepNumber) {
+            document.querySelectorAll('.purchase-step').forEach(step => step.classList.add('d-none'));
+            const steps = {
+                1: 'personalDetailsForm',
+                2: 'shippingDetailsForm',
+                3: 'paymentProcessing',
+                4: 'credentialGeneration',
+                5: 'invoiceDisplay'
+            };
+            if (steps[stepNumber]) {
+                document.getElementById(steps[stepNumber]).classList.remove('d-none');
+                document.getElementById(steps[stepNumber]).classList.add('fade-in');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepIndicator();
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep(step) {
+            currentStep = step;
+            updateStepIndicator();
+            showStep(currentStep);
+        }
+
+        document.getElementById('personalForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('personalForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            orderData.personal = {
+                ...orderData.personal,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value
+            };
+            nextStep();
+        });
+
+        document.getElementById('shippingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('shippingForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            orderData.shipping = {
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pincode: document.getElementById('pincode').value,
+                country: document.getElementById('country').value
+            };
+            nextStep();
+            initiatePurchase();
+        });
+
+        async function initiatePurchase() {
+            try {
+                const resp = await fetch('http://localhost:3100/web/landing/api/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        personal: orderData.personal,
+                        shipping: orderData.shipping,
+                        product: currentProduct
+                    })
+                });
+
+                const data = await resp.json();
+                if (!data.success) {
+                    alert(data.message || 'Failed to initiate purchase. Please try again.');
+                    return;
+                }
+
+                const { orderId, razorpayOrderId, amount, key } = data;
+                orderData.internalOrderId = orderId;
+
+                const rzp = new Razorpay({
+                    key,
+                    amount,
+                    currency: 'INR',
+                    order_id: razorpayOrderId,
+                    handler: async function(res) {
+                        try {
+                            orderData.payment = {
+                                paymentId: res.razorpay_payment_id,
+                                signature: res.razorpay_signature
+                            };
+                            nextStep();
+
+                            const comp = await fetch('http://localhost:3100/web/landing/api/complete', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    orderId,
+                                    paymentId: res.razorpay_payment_id,
+                                    signature: res.razorpay_signature
+                                })
+                            });
+
+                            const compData = await comp.json();
+                            if (!compData.success) {
+                                alert(compData.message || 'Payment verification failed. Contact support.');
+                                return;
+                            }
+
+                            orderData.credentials = compData.credentials;
+                            orderData.invoice = compData.invoice;
+                            nextStep();
+                            displayInvoice();
+                        } catch (err) {
+                            alert('Payment processing error. Try again.');
+                            console.error(err);
+                        }
+                    },
+                    prefill: {
+                        name: `${orderData.personal.firstName} ${orderData.personal.lastName}`,
+                        email: orderData.personal.email,
+                        contact: orderData.personal.phone
+                    },
+                    theme: { color: '#6366f1' }
+                });
+
+                rzp.open();
+            } catch (err) {
+                alert('Something went wrong while initiating purchase.');
+                console.error(err);
+            }
+        }
+
+        function displayInvoice() {
+            const invoiceNumber = orderData.invoice.number;
+            const invoiceDate = orderData.invoice.date;
+            document.getElementById('invoiceNumber').textContent = invoiceNumber;
+            document.getElementById('invoiceDate').textContent = invoiceDate;
+
+            const customerDetails = `
+                <strong>${orderData.personal.firstName} ${orderData.personal.lastName}</strong><br>
+                ${orderData.personal.email}<br>
+                ${orderData.personal.phone}<br>
+                ${orderData.shipping.address}<br>
+                ${orderData.shipping.city}, ${orderData.shipping.state} - ${orderData.shipping.pincode}
+            `;
+            document.getElementById('customerDetails').innerHTML = customerDetails;
+
+            const orderSummary = `
+                <div class="d-flex justify-content-between mb-2">
+                    <span>${currentProduct.name}</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+                ${currentProduct.id === 'digital-app' ? `
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>NFC Card (FREE)</span>
+                        <span>₹0</span>
+                    </div>
+                ` : ''}
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total Amount</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+            `;
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+
+            document.getElementById('apiKey').textContent = orderData.credentials.apiKey;
+            document.getElementById('apiSecret').textContent = orderData.credentials.apiSecret;
+        }
+
+        async function downloadInvoice() {
+            try {
+                const resp = await fetch(`http://localhost:3100/web/landing/api/invoice/${orderData.internalOrderId}`);
+                if (!resp.ok) throw new Error('Failed to download invoice');
+                const text = await resp.text();
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `invoice-${orderData.invoice.number}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Error downloading invoice. Please try again.');
+                console.error(err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.product-icon').forEach(icon => {
+                icon.style.animation = 'float 3s ease-in-out infinite';
+            });
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+                .product-card:hover .product-icon { animation-duration: 1s; }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+    
+</body>
+</html>

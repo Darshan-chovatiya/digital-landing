@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Section - NFC & Digital Cards</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .section-bg {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px 0;
+            padding: 40px 0;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .price-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #10b981;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .free-badge {
+            background: #f59e0b;
+        }
+
+        .btn-purchase {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-purchase:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            color: white;
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+        }
+
+        .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step.active {
+            background: #6366f1;
+            color: white;
+        }
+
+        .step.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 40px;
+            height: 2px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step.completed::after {
+            background: #10b981;
+        }
+
+        .invoice-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .invoice-header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                margin-bottom: 20px;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+            
+            .product-icon {
+                font-size: 3rem;
+            }
+            
+            .step-indicator {
+                flex-wrap: wrap;
+            }
+            
+            .step {
+                margin: 5px;
+            }
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <div class="section-bg">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold text-white mb-3">Our Premium Products</h2>
+                    <p class="lead text-white-50">Choose the perfect solution for your digital identity needs</p>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <!-- NFC Card -->
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="product-image">
+                                <i class="fas fa-credit-card product-icon"></i>
+                                <div class="price-badge free-badge">FREE*</div>
+                            </div>
+                            <div class="card-body p-4">
+                                <h4 class="card-title fw-bold mb-3">NFC Smart Card</h4>
+                                <p class="card-text text-muted mb-4">Premium NFC-enabled smart card for instant contact sharing and networking. Tap to connect instantly!</p>
+                                
+                                <ul class="feature-list mb-4">
+                                    <li>Instant Contact Sharing</li>
+                                    <li>Premium PVC Material</li>
+                                    <li>Custom Design Options</li>
+                                    <li>Water Resistant</li>
+                                    <li>2-Year Warranty</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-purchase" onclick="startPurchase('nfc-card', 'NFC Smart Card', 0, true)">
+                                        Get FREE with App Purchase
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Digital Card App -->
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="product-image">
+                                <i class="fas fa-mobile-alt product-icon"></i>
+                                <div class="price-badge">₹999</div>
+                            </div>
+                            <div class="card-body p-4">
+                                <h4 class="card-title fw-bold mb-3">Digital Card App</h4>
+                                <p class="card-text text-muted mb-4">Complete digital business card solution with analytics, custom themes, and unlimited sharing capabilities.</p>
+                                
+                                <ul class="feature-list mb-4">
+                                    <li>Unlimited Digital Cards</li>
+                                    <li>Real-time Analytics</li>
+                                    <li>Custom Themes & Branding</li>
+                                    <li>Social Media Integration</li>
+                                    <li>FREE NFC Card Included</li>
+                                </ul>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-purchase" onclick="startPurchase('digital-app', 'Digital Card App', 999, false)">
+                                        <i class="fas fa-shopping-cart me-2"></i>Purchase Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="text-white-50"><small>* NFC Card is FREE when you purchase the Digital Card App</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Continue</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-purchase">
+                                <span class="login-btn-text">Login</span>
+                                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                            </button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Don't have an account? <a href="#" onclick="showRegister()">Register here</a></small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Flow Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Complete Your Purchase</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                        <div class="step active" id="step1">1</div>
+                        <div class="step" id="step2">2</div>
+                        <div class="step" id="step3">3</div>
+                        <div class="step" id="step4">4</div>
+                        <div class="step" id="step5">5</div>
+                    </div>
+
+                    <!-- Personal Details Form -->
+                    <div id="personalDetailsForm" class="purchase-step">
+                        <h4 class="mb-4">Personal Details</h4>
+                        <form id="personalForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-purchase">Continue to Shipping</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Shipping Details Form -->
+                    <div id="shippingDetailsForm" class="purchase-step d-none">
+                        <h4 class="mb-4">Shipping Details</h4>
+                        <form id="shippingForm">
+                            <div class="mb-3">
+                                <label class="form-label">Full Address</label>
+                                <textarea class="form-control" id="address" rows="3" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">PIN Code</label>
+                                    <input type="text" class="form-control" id="pincode" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" value="India" required>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-outline-secondary" onclick="previousStep(1)">Back</button>
+                                <button type="submit" class="btn btn-purchase flex-fill">Continue to Payment</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Processing -->
+                    <div id="paymentProcessing" class="purchase-step d-none text-center">
+                        <h4 class="mb-4">Processing Payment</h4>
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted">Please wait while we process your payment...</p>
+                    </div>
+
+                    <!-- API Credential Generation -->
+                    <div id="credentialGeneration" class="purchase-step d-none text-center">
+                        <h4 class="mb-4">Generating Your Credentials</h4>
+                        <div class="spinner-border text-success mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted">Setting up your account and generating API credentials...</p>
+                    </div>
+
+                    <!-- Invoice Display -->
+                    <div id="invoiceDisplay" class="purchase-step d-none">
+                        <div class="invoice-card">
+                            <div class="invoice-header">
+                                <h3 class="mb-0">Payment Successful!</h3>
+                                <p class="mb-0 mt-2">Thank you for your purchase</p>
+                            </div>
+                            <div class="p-4">
+                                <div class="row mb-4">
+                                    <div class="col-6">
+                                        <h6 class="text-muted">Invoice Number</h6>
+                                        <strong id="invoiceNumber">INV-2024-001</strong>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <h6 class="text-muted">Date</h6>
+                                        <strong id="invoiceDate"></strong>
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">Customer Details</h6>
+                                    <div id="customerDetails"></div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">Order Summary</h6>
+                                    <div id="orderSummary"></div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="mb-4">
+                                    <h6 class="text-muted">API Credentials</h6>
+                                    <div class="bg-light p-3 rounded">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <small class="text-muted">API Key</small><br>
+                                                <code id="apiKey">Loading...</code>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small class="text-muted">API Secret</small><br>
+                                                <code id="apiSecret">Loading...</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary" onclick="downloadInvoice()">
+                                        <i class="fas fa-download me-2"></i>Download Invoice
+                                    </button>
+                                    <button class="btn btn-success flex-fill" data-bs-dismiss="modal">
+                                        Complete Purchase
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentProduct = {};
+        let currentStep = 1;
+        let orderData = {};
+
+        function startPurchase(productId, productName, price, isFree) {
+            currentProduct = { id: productId, name: productName, price: price, isFree: isFree };
+            
+            if (isFree) {
+                alert('Please purchase the Digital Card App to get the NFC Card for free!');
+                return;
+            }
+            
+            // Show login modal first
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const loginBtn = this.querySelector('button[type="submit"]');
+            const btnText = loginBtn.querySelector('.login-btn-text');
+            const spinner = loginBtn.querySelector('.spinner-border');
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            btnText.textContent = 'Logging in...';
+            spinner.classList.remove('d-none');
+            
+            // Simulate login API call
+            setTimeout(() => {
+                // Hide login modal and show purchase modal
+                bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+                
+                setTimeout(() => {
+                    const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    purchaseModal.show();
+                    resetPurchaseFlow();
+                }, 300);
+                
+                // Reset login button
+                loginBtn.disabled = false;
+                btnText.textContent = 'Login';
+                spinner.classList.add('d-none');
+            }, 1500);
+        });
+
+        function showRegister() {
+            alert('Registration feature would be implemented here. For demo, any email/password will work.');
+        }
+
+        function resetPurchaseFlow() {
+            currentStep = 1;
+            updateStepIndicator();
+            showStep(1);
+        }
+
+        function updateStepIndicator() {
+            for (let i = 1; i <= 5; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                
+                if (i < currentStep) {
+                    step.classList.add('completed');
+                } else if (i === currentStep) {
+                    step.classList.add('active');
+                }
+            }
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.purchase-step').forEach(step => {
+                step.classList.add('d-none');
+            });
+            
+            // Show current step
+            const steps = {
+                1: 'personalDetailsForm',
+                2: 'shippingDetailsForm',
+                3: 'paymentProcessing',
+                4: 'credentialGeneration',
+                5: 'invoiceDisplay'
+            };
+            
+            if (steps[stepNumber]) {
+                document.getElementById(steps[stepNumber]).classList.remove('d-none');
+                document.getElementById(steps[stepNumber]).classList.add('fade-in');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepIndicator();
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep(step) {
+            currentStep = step;
+            updateStepIndicator();
+            showStep(currentStep);
+        }
+
+        // Personal details form handler
+        document.getElementById('personalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            orderData.personal = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value
+            };
+            
+            nextStep();
+        });
+
+        // Shipping details form handler
+        document.getElementById('shippingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            orderData.shipping = {
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pincode: document.getElementById('pincode').value,
+                country: document.getElementById('country').value
+            };
+            
+            nextStep();
+            processPayment();
+        });
+
+        function processPayment() {
+            // Show payment processing step
+            setTimeout(() => {
+                const options = {
+                    key: 'rzp_test_MoBsdjMQnHOUmr', // Replace with your Razorpay key
+                    amount: currentProduct.price * 100, // Amount in paise
+                    currency: 'INR',
+                    name: 'Digital Card Solutions',
+                    description: currentProduct.name,
+                    image: 'https://via.placeholder.com/100x100?text=DCS',
+                    order_id: 'order_' + Date.now(),
+                    handler: function (response) {
+                        orderData.payment = {
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id,
+                            signature: response.razorpay_signature
+                        };
+                        
+                        nextStep();
+                        generateCredentials();
+                    },
+                    prefill: {
+                        name: `${orderData.personal.firstName} ${orderData.personal.lastName}`,
+                        email: orderData.personal.email,
+                        contact: orderData.personal.phone
+                    },
+                    theme: {
+                        color: '#6366f1'
+                    }
+                };
+                
+                const rzp = new Razorpay(options);
+                rzp.open();
+                
+                rzp.on('payment.failed', function (response) {
+                    alert('Payment failed: ' + response.error.description);
+                    previousStep(2);
+                });
+            }, 2000);
+        }
+
+        function generateCredentials() {
+            // Simulate API credential generation
+            setTimeout(() => {
+                orderData.credentials = {
+                    apiKey: 'dk_' + Math.random().toString(36).substr(2, 16),
+                    apiSecret: 'sk_' + Math.random().toString(36).substr(2, 32)
+                };
+                
+                nextStep();
+                displayInvoice();
+            }, 3000);
+        }
+
+        function displayInvoice() {
+            // Generate invoice number and date
+            const invoiceNumber = 'INV-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+            const invoiceDate = new Date().toLocaleDateString('en-IN');
+            
+            document.getElementById('invoiceNumber').textContent = invoiceNumber;
+            document.getElementById('invoiceDate').textContent = invoiceDate;
+            
+            // Customer details
+            const customerDetails = `
+                <strong>${orderData.personal.firstName} ${orderData.personal.lastName}</strong><br>
+                ${orderData.personal.email}<br>
+                ${orderData.personal.phone}<br>
+                ${orderData.shipping.address}<br>
+                ${orderData.shipping.city}, ${orderData.shipping.state} - ${orderData.shipping.pincode}
+            `;
+            document.getElementById('customerDetails').innerHTML = customerDetails;
+            
+            // Order summary
+            const orderSummary = `
+                <div class="d-flex justify-content-between mb-2">
+                    <span>${currentProduct.name}</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>NFC Card (FREE)</span>
+                    <span>₹0</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total Amount</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+            `;
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+            
+            // API credentials
+            document.getElementById('apiKey').textContent = orderData.credentials.apiKey;
+            document.getElementById('apiSecret').textContent = orderData.credentials.apiSecret;
+        }
+
+        function downloadInvoice() {
+            // Create invoice content
+            const invoiceContent = `
+                Digital Card Solutions - Invoice
+                ================================
+                
+                Invoice Number: ${document.getElementById('invoiceNumber').textContent}
+                Date: ${document.getElementById('invoiceDate').textContent}
+                
+                Customer Details:
+                ${document.getElementById('customerDetails').textContent}
+                
+                Order Summary:
+                ${currentProduct.name}: ₹${currentProduct.price}
+                NFC Card (FREE): ₹0
+                Total: ₹${currentProduct.price}
+                
+                Payment ID: ${orderData.payment.paymentId}
+                
+                API Credentials:
+                API Key: ${orderData.credentials.apiKey}
+                API Secret: ${orderData.credentials.apiSecret}
+                
+                Thank you for your purchase!
+            `;
+            
+            const blob = new Blob([invoiceContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `invoice-${document.getElementById('invoiceNumber').textContent}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Add some animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate product cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Add floating animation to product icons
+        document.querySelectorAll('.product-icon').forEach(icon => {
+            icon.style.animation = 'float 3s ease-in-out infinite';
+        });
+
+        // Add CSS keyframes for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            .product-card:hover .product-icon {
+                animation-duration: 1s;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+
+
+
+
+
+
+// require('dotenv').config();
+// const bcrypt = require('bcrypt');
+// const crypto = require('crypto');
+// const Order = require('../../models/landing_user');
+
+// exports.createAccount = async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+//         if (!email || !password) {
+//             return res.status(400).json({ success: false, message: 'Missing email or password' });
+//         }
+
+//         if (password.length < 8) {
+//             return res.status(400).json({ success: false, message: 'Password must be at least 8 characters long' });
+//         }
+
+//         const existingOrder = await Order.findOne({ 'personal.email': email });
+//         if (existingOrder) {
+//             return res.status(400).json({ success: false, message: 'Email already exists' });
+//         }
+
+//         res.json({ success: true });
+//     } catch (e) {
+//         console.error('Create Account Error:', e);
+//         res.status(500).json({ success: false, message: 'Server error' });
+//     }
+// };
+
+// exports.startLanding = async (req, res) => {
+//     try {
+//         const { personal, shipping, product } = req.body;
+
+//         if (!personal || !shipping || !product) {
+//             return res.status(400).json({ success: false, message: 'Missing data' });
+//         }
+
+//         const existingOrder = await Order.findOne({ 'personal.email': personal.email });
+//         if (existingOrder) {
+//             return res.status(400).json({ success: false, message: 'Email already exists' });
+//         }
+
+//         const hashedPassword = await bcrypt.hash(personal.password, 10);
+
+//         // Mock Razorpay order creation
+//         const mockRazorpayOrderId = `mock_order_${Date.now()}`;
+//         const amount = product.price * 100;
+
+//         const order = new Order({
+//             personal: { ...personal, password: hashedPassword },
+//             shipping,
+//             product,
+//             payment: { orderId: mockRazorpayOrderId }
+//         });
+
+//         await order.save();
+
+//         res.json({
+//             success: true,
+//             orderId: order._id,
+//             razorpayOrderId: mockRazorpayOrderId,
+//             amount,
+//             key: 'mock_key' // Mock key for frontend compatibility
+//         });
+
+//         // TODO: Restore Razorpay integration when keys are available
+//         /*
+//         const Razorpay = require('razorpay');
+//         const razorpay = new Razorpay({
+//             key_id: process.env.RAZORPAY_KEY,
+//             key_secret: process.env.RAZORPAY_SECRET
+//         });
+//         const razorOrder = await razorpay.orders.create({
+//             amount,
+//             currency: 'INR',
+//             receipt: 'rcpt_' + Date.now()
+//         });
+//         order.payment.orderId = razorOrder.id;
+//         await order.save();
+//         res.json({
+//             success: true,
+//             orderId: order._id,
+//             razorpayOrderId: razorOrder.id,
+//             amount,
+//             key: process.env.RAZORPAY_KEY
+//         });
+//         */
+//     } catch (e) {
+//         console.error('Start Error:', e);
+//         res.status(500).json({ success: false, message: 'Server error', details: e.message });
+//     }
+// };
+
+// exports.completeLanding = async (req, res) => {
+//     try {
+//         const { orderId, paymentId, signature } = req.body;
+
+//         if (!orderId || !paymentId || !signature) {
+//             return res.status(400).json({ success: false, message: 'Missing payment info' });
+//         }
+
+//         const order = await Order.findById(orderId);
+//         if (!order) return res.status(404).json({ success: false, message: 'Order not found' });
+
+//         // Mock signature verification
+//         if (!paymentId.startsWith('mock_payment_') || !signature.startsWith('mock_signature_')) {
+//             return res.status(400).json({ success: false, message: 'Invalid mock payment data' });
+//         }
+
+//         // TODO: Restore Razorpay signature verification when keys are available
+//         /*
+//         const expectedSignature = crypto
+//             .createHmac('sha256', process.env.RAZORPAY_SECRET)
+//             .update(order.payment.orderId + '|' + paymentId)
+//             .digest('hex');
+//         if (expectedSignature !== signature) {
+//             return res.status(400).json({ success: false, message: 'Invalid signature' });
+//         }
+//         */
+
+//         const apiKey = 'dk_' + Math.random().toString(36).substr(2, 16);
+//         const apiSecret = 'sk_' + Math.random().toString(36).substr(2, 32);
+//         const invoiceNumber = 'INV-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+//         const invoiceDate = new Date().toLocaleDateString('en-IN');
+
+//         order.payment.paymentId = paymentId;
+//         order.payment.signature = signature;
+//         order.credentials = { apiKey, apiSecret };
+//         order.invoice = { number: invoiceNumber, date: invoiceDate };
+
+//         await order.save();
+
+//         res.json({ success: true, credentials: order.credentials, invoice: order.invoice });
+//     } catch (e) {
+//         console.error('Complete Error:', e);
+//         res.status(500).json({ success: false, message: 'Server error' });
+//     }
+// };
+
+// exports.invoiceLanding = async (req, res) => {
+//     try {
+//         const order = await Order.findById(req.params.id);
+//         if (!order) return res.status(404).send('Order not found');
+
+//         const txt = `
+// Invoice Number: ${order.invoice.number}
+// Date: ${order.invoice.date}
+
+// Name: ${order.personal.firstName} ${order.personal.lastName}
+// Email: ${order.personal.email}
+// Phone: ${order.personal.phone}
+// Address: ${order.shipping.address}, ${order.shipping.city}, ${order.shipping.state} - ${order.shipping.pincode}
+
+// Product: ${order.product.name} – ₹${order.product.price}
+// ${order.product.id === 'digital-app' ? 'NFC Card (FREE): ₹0\n' : ''}
+// Payment ID: ${order.payment.paymentId}
+
+// API Key: ${order.credentials.apiKey}
+// API Secret: ${order.credentials.apiSecret}
+
+// Thank you for your purchase!
+// `;
+
+//         res.setHeader('Content-Disposition', `attachment; filename=invoice-${order.invoice.number}.txt`);
+//         res.send(txt);
+//     } catch (e) {
+//         console.error('Invoice Error:', e);
+//         res.status(500).send('Error');
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     <script>
+        let currentProduct = {};
+        let currentStep = 1;
+        let orderData = {};
+
+        function startPurchase(pid, name, price, isFree) {
+            currentProduct = { id: pid, name, price, isFree };
+            if (isFree) {
+                alert('Please purchase the Digital Card App to get the NFC Card for free!');
+                currentProduct = { id: 'digital-app', name: 'Digital Card App', price: 999, isFree: false };
+            }
+            document.getElementById('createEmail').value = '';
+            document.getElementById('createPassword').value = '';
+            new bootstrap.Modal(document.getElementById('createAccountModal')).show();
+        }
+
+        document.getElementById('createAccountForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('createEmail').value;
+            const password = document.getElementById('createPassword').value;
+            const createBtn = document.querySelector('#createAccountForm button');
+            const btnText = createBtn.querySelector('.create-btn-text');
+            const spinner = createBtn.querySelector('.spinner-border');
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            try {
+                const resp = await fetch('http://localhost:3100/web/landing/api/create-account', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await resp.json();
+                if (!data.success) {
+                    alert(data.message || 'Account creation failed. Please try again.');
+                    return;
+                }
+                orderData.personal = { email, password };
+                bootstrap.Modal.getInstance(document.getElementById('createAccountModal')).hide();
+                setTimeout(() => {
+                    new bootstrap.Modal(document.getElementById('purchaseModal')).show();
+                    resetPurchaseFlow();
+                }, 300);
+            } catch (err) {
+                alert('Error during account creation. Please try again.');
+                console.error(err);
+            } finally {
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+            }
+        });
+
+        function resetPurchaseFlow() {
+            currentStep = 1;
+            updateStepIndicator();
+            showStep(1);
+            document.getElementById('personalForm').reset();
+            document.getElementById('shippingForm').reset();
+            document.getElementById('email').value = orderData.personal.email;
+        }
+
+        function updateStepIndicator() {
+            for (let i = 1; i <= 5; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                if (i < currentStep) step.classList.add('completed');
+                else if (i === currentStep) step.classList.add('active');
+            }
+        }
+
+        function showStep(stepNumber) {
+            document.querySelectorAll('.purchase-step').forEach(step => step.classList.add('d-none'));
+            const steps = {
+                1: 'personalDetailsForm',
+                2: 'shippingDetailsForm',
+                3: 'paymentProcessing',
+                4: 'credentialGeneration',
+                5: 'invoiceDisplay'
+            };
+            if (steps[stepNumber]) {
+                document.getElementById(steps[stepNumber]).classList.remove('d-none');
+                document.getElementById(steps[stepNumber]).classList.add('fade-in');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepIndicator();
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep(step) {
+            currentStep = step;
+            updateStepIndicator();
+            showStep(currentStep);
+        }
+
+        document.getElementById('personalForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('personalForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            orderData.personal = {
+                ...orderData.personal,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value
+            };
+            nextStep();
+        });
+
+        document.getElementById('shippingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('shippingForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            orderData.shipping = {
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pincode: document.getElementById('pincode').value,
+                country: document.getElementById('country').value
+            };
+            nextStep();
+            initiatePurchase();
+        });
+
+        async function initiatePurchase() {
+            try {
+                const resp = await fetch('http://localhost:3100/web/landing/api/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        personal: orderData.personal,
+                        shipping: orderData.shipping,
+                        product: currentProduct
+                    })
+                });
+
+                const data = await resp.json();
+                if (!data.success) {
+                    alert(data.message || 'Failed to initiate purchase. Please try again.');
+                    return;
+                }
+
+                const { orderId, razorpayOrderId, amount, key } = data;
+                orderData.internalOrderId = orderId;
+
+                // Simulate payment without Razorpay
+                setTimeout(async () => {
+                    try {
+                        orderData.payment = {
+                            paymentId: `mock_payment_${Date.now()}`,
+                            signature: `mock_signature_${Date.now()}`
+                        };
+                        nextStep();
+
+                        const comp = await fetch('http://localhost:3100/web/landing/api/complete', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                orderId,
+                                paymentId: orderData.payment.paymentId,
+                                signature: orderData.payment.signature
+                            })
+                        });
+
+                        const compData = await comp.json();
+                        if (!compData.success) {
+                            alert(compData.message || 'Payment verification failed. Contact support.');
+                            return;
+                        }
+
+                        orderData.credentials = compData.credentials;
+                        orderData.invoice = compData.invoice;
+                        nextStep();
+                        displayInvoice();
+                    } catch (err) {
+                        alert('Payment processing error. Try again.');
+                        console.error(err);
+                    }
+                }, 2000); // Simulate payment delay
+            } catch (err) {
+                alert('Something went wrong while initiating purchase.');
+                console.error(err);
+            }
+        }
+
+        function displayInvoice() {
+            const invoiceNumber = orderData.invoice.number;
+            const invoiceDate = orderData.invoice.date;
+            document.getElementById('invoiceNumber').textContent = invoiceNumber;
+            document.getElementById('invoiceDate').textContent = invoiceDate;
+
+            const customerDetails = `
+                <strong>${orderData.personal.firstName} ${orderData.personal.lastName}</strong><br>
+                ${orderData.personal.email}<br>
+                ${orderData.personal.phone}<br>
+                ${orderData.shipping.address}<br>
+                ${orderData.shipping.city}, ${orderData.shipping.state} - ${orderData.shipping.pincode}
+            `;
+            document.getElementById('customerDetails').innerHTML = customerDetails;
+
+            const orderSummary = `
+                <div class="d-flex justify-content-between mb-2">
+                    <span>${currentProduct.name}</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+                ${currentProduct.id === 'digital-app' ? `
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>NFC Card (FREE)</span>
+                        <span>₹0</span>
+                    </div>
+                ` : ''}
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total Amount</span>
+                    <span>₹${currentProduct.price}</span>
+                </div>
+            `;
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+
+            document.getElementById('apiKey').textContent = orderData.credentials.apiKey;
+            document.getElementById('apiSecret').textContent = orderData.credentials.apiSecret;
+        }
+
+        async function downloadInvoice() {
+            try {
+                const resp = await fetch(`http://localhost:3100/web/landing/api/invoice/${orderData.internalOrderId}`);
+                if (!resp.ok) throw new Error('Failed to download invoice');
+                const text = await resp.text();
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `invoice-${orderData.invoice.number}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Error downloading invoice. Please try again.');
+                console.error(err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.product-icon').forEach(icon => {
+                icon.style.animation = 'float 3s ease-in-out infinite';
+            });
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+                .product-card:hover .product-icon { animation-duration: 1s; }
+            `;
+            document.head.appendChild(style);
+        });
+    </script> -->
+</body>
+</html>
