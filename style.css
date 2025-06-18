@@ -52,7 +52,7 @@ body {
   color: white;
   border: 1px solid white;
   outline: none;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
